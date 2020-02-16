@@ -64,7 +64,9 @@ if ! [ -x "$(command -v gcloud)" ]; then
     fi
     gcloud init
     exit 1
-else 
+else
+    gcloud auth login
+    gcloud init
     echo "Google Cloud SDK is already installed. Let's move on"
 fi
 

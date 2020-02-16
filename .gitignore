@@ -1,2 +1,5 @@
 .idea
 logfile.txt
+kafka-secrets.yaml
+kafka-source-deploy.yaml
+kafka-source-display.yaml
