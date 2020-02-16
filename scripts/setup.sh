@@ -163,6 +163,9 @@ kubectl label namespace kafka-eventing knative-eventing-injection=enabled
 gcloud config set run/namespace kafka-eventing
 
 
+echo "***** Wait 60 seconds *****"
+sleep 60
+
 ##### Get istio-gateway external IP
 echo "****** We are going to grab the external IP ******"
 export EXTERNAL_IP=$(kubectl get service istio-ingressgateway --namespace istio-system | awk 'FNR == 2 {print $4}')

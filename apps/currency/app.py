@@ -44,7 +44,6 @@ def get_exchange_rate():
         return "Error"
 
 
-
 if __name__ == "__main__":
-    app.debug=True
+    app.debug = True
     app.run()
