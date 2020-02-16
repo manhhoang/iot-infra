@@ -55,9 +55,7 @@ if ! [ -x "$(command -v gcloud)" ]; then
         gcloud auth login
 
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-266.0.0-darwin-x86_64.tar.gz -o google-cloud-sdk-266.0.0-darwin-x86_64.tar.gz
-        tar xf google-cloud-sdk-266.0.0-darwin-x86_64.tar.gz && ./google-cloud-sdk/install.sh
-        echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bash_profile
+        brew cask install google-cloud-sdk
         #source ~/.bash_profile
         export PATH=$PATH:/usr/local/go/bin
         gcloud auth login
