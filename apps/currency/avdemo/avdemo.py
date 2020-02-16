@@ -15,8 +15,6 @@ class AlphaKafka(object):
         #self.producer = KafkaProducer(bootstrap_servers=self.host)
         self.p = Producer({
             'bootstrap.servers': host,
-            'broker.version.fallback': '0.10.0.0',
-            'api.version.fallback.ms': 0,
             'sasl.mechanisms': 'PLAIN',
             'security.protocol': 'SASL_SSL',
             'sasl.username': ckey,
@@ -24,8 +22,6 @@ class AlphaKafka(object):
         })
         self.c = Consumer({
             'bootstrap.servers': host,
-            'broker.version.fallback': '0.10.0.0',
-            'api.version.fallback.ms': 0,
             'sasl.mechanisms': 'PLAIN',
             'security.protocol': 'SASL_SSL',
             'sasl.username': ckey,
