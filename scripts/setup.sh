@@ -92,13 +92,13 @@ sleep 60
 #### Get Confluent 
 export CONFLUENT_HOST=$(ccloud kafka cluster describe `ccloud kafka cluster list | grep "*" | cut -c4-14` | grep 'SASL_SSL'  | sed 's/^.* | //' | cut -f3-4 -d"/" | tr -d '|')
 #### Setting API Keys for Confluent
-ccloud api-key create > secrets.txt
+ccloud api-key create --resource $CONFLUENT_ID > secrets.txt
 export CONFLUENT_KEY=$(grep 'API Key |' secrets.txt | sed 's/^.* | //' | cut -d' ' -f1)
 export CONFLUENT_SECRET=$(grep 'Secret  |' secrets.txt | sed 's/^.* | //' | cut -d' ' -f1)
 rm -rf secrets.txt
 clear
 
-ccloud api-key use $CONFLUENT_KEY
+ccloud api-key use $CONFLUENT_KEY --resource $CONFLUENT_ID
 
 
 #### BoilerPlate Code for
