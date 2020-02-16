@@ -15,14 +15,12 @@ CONFLUENT_KEY = os.environ.get("CONFLUENT_KEY")
 CONFLUENT_SECRET = os.environ.get("CONFLUENT_SECRET")
 ALPHAVANTAGE_KEY = os.environ.get("ALPHAVANTAGE_KEY")
 
-
-
 origin = AlphaKafka(CONFLUENT_HOST, CONFLUENT_KEY, CONFLUENT_SECRET, ALPHAVANTAGE_KEY)
+
 
 @app.route("/")
 def hello():
     return "Hello World!"
-
 
 
 @app.route('/api/v1/currency', methods=['POST'])

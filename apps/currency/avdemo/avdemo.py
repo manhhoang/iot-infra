@@ -50,7 +50,8 @@ class AlphaKafka(object):
 
     def produce(self, topic, message):
         client = self.p
-        msg = client.produce(topic, value=message, callback=self.acked)
+        msg = client.produce(topic, value=message, on_delivery=self.acked)
+        client.flush()
         return msg
 
 
