@@ -13,6 +13,8 @@ chmod +x scripts/setup.sh
 ## Clean resources
 
 ```
+export CLUSTER_NAME="kafka-events"
+export CONFLUENT_ID=$(ccloud kafka cluster list | grep "*" | cut -c4-14)
 chmod +x scripts/cleanup.sh
 ./scripts/cleanup.sh
 ```

@@ -74,7 +74,7 @@ fi
 if ! [ -x "$(command -v ccloud)" ]; then
     echo "***** Installing Confluent Cloud CLI *****"
     wget https://s3-us-west-2.amazonaws.com/confluent.cloud/ccloud-cli/archives/latest/ccloud_latest_darwin_amd64.tar.gz
-    unzip ccloud_latest_darwin_amd64.tar.gz
+    gunzip -c ccloud_latest_darwin_amd64.tar.gz | tar xopft -
     cp /ccloud/ccloud /usr/local/bin/ccloud
 else 
     echo "Confluent Cloud CLI is already installed. Let's move on"
