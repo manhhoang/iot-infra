@@ -2,6 +2,7 @@ apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: event-display
+  namespace: kafka-eventing
 spec:
   runLatest:
     configuration:
@@ -14,7 +15,7 @@ apiVersion: sources.eventing.knative.dev/v1alpha1
 kind: KafkaSource
 metadata:
   name: kafka-source
-  namespace: default
+  namespace: kafka-eventing
 spec:
   consumerGroup: knative-group
   bootstrapServers:  CONFLUENT-SERVER
