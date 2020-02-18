@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"context"
 	"google.golang.org/api/iterator"
 	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 	"cloud.google.com/go/bigquery"
@@ -9,6 +10,10 @@ import (
 )
 
 func main() {
+
+}
+
+func comsume() {
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost",
 		"group.id":          "myGroup",
@@ -32,6 +37,44 @@ func main() {
 	}
 
 	c.Close()
+}
+
+// Item represents a row item.
+type Item struct {
+	Name string
+	Age  int
+}
+
+// Save implements the ValueSaver interface.
+func (i *Item) Save() (map[string]bigquery.Value, string, error) {
+	return map[string]bigquery.Value{
+		"full_name": i.Name,
+		"age":       i.Age,
+	}, "", nil
+}
+
+// insertRows demonstrates inserting data into a table using the streaming insert mechanism.
+func insertRows(projectID, datasetID, tableID string) error {
+	// projectID := "my-project-id"
+	// datasetID := "mydataset"
+	// tableID := "mytable"
+	ctx := context.Background()
+	client, err := bigquery.NewClient(ctx, projectID)
+	if err != nil {
+		return fmt.Errorf("bigquery.NewClient: %v", err)
+	}
+	defer client.Close()
+
+	inserter := client.Dataset(datasetID).Table(tableID).Inserter()
+	items := []*Item{
+		// Item implements the ValueSaver interface.
+		{Name: "Phred Phlyntstone", Age: 32},
+		{Name: "Wylma Phlyntstone", Age: 29},
+	}
+	if err := inserter.Put(ctx, items); err != nil {
+		return err
+	}
+	return nil
 }
 
 func insertData() {
